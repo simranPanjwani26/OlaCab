@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 2021_09_30_092836) do
   create_table "bookings", force: :cascade do |t|
     t.datetime "pick_up_time"
     t.datetime "return_time"
-    t.datetime "booking_status"
+    t.string "booking_status"
     t.integer "booking_price"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
