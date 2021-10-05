@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  pick_up_time: 2021-09-30 14:58:36
+  return_time: 2021-09-30 14:58:36
+  booking_status: 2021-09-30 14:58:36
+  user_id: 1
+  vehicle_id: 1
+
+two:
+  pick_up_time: 2021-09-30 14:58:36
+  return_time: 2021-09-30 14:58:36
+  booking_status: 2021-09-30 14:58:36
+  user_id: 1
+  vehicle_id: 1
