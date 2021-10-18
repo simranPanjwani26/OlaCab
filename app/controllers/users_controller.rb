@@ -4,21 +4,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(param[:id])
-  end
-
-  def new
-    @user = User.new 
-  end
-
-  def create
-    @user =  User.new(user_params)
-    if @user.save!
-      flash[:notice] = 'User added!'
-      redirect_to root_path
-      else
-        render :new
-    end
+    @user = User.find(params[:id])
   end
 
   def edit   
@@ -46,4 +32,9 @@ class UsersController < ApplicationController
       render :destroy   
     end   
   end   
+
+  private
+  def user_params
+    params.require(:user).permit(:first_name, :last_name, :phone_no, :email, :password, :password_confirmation)
+  end
 end

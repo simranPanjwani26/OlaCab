@@ -1,4 +1,4 @@
 class Vehicle < ApplicationRecord
 
-    has_many :bookings ,through: :users
+    has_many :bookings 
 end

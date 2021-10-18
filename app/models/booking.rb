@@ -1,6 +1,6 @@
 class Booking < ApplicationRecord
 
     belongs_to :user
-    belongs_to :Vehicle
+    belongs_to :vehicle
     
 end

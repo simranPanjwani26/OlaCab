@@ -1,4 +1,4 @@
-class AddressController < ApplicationController
+class AddressesController < ApplicationController
   def index
     @addresses = Address.all
   end
@@ -11,16 +11,19 @@ class AddressController < ApplicationController
     @address = Address.new   
   end   
   
-  def create   
-    @address = Address.new(address_params)   
-      if @address.save   
-        flash[:notice] = 'Address added!'   
-        redirect_to root_path   
-      else   
-        flash[:error] = 'Failed to edit Address!'   
-        render :new   
-      end   
-  end 
+  def create
+    @address = Address.new(address_params)
+
+    respond_to do |format|
+      if @address.save
+        format.html { redirect_to @address, notice: "Address was successfully created." }
+        format.json { render :show, status: :created, location: @address }
+      else
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: @address.errors, status: :unprocessable_entity }
+      end
+    end
+  end
   
   def edit   
     @address = Address.find(params[:id])   
@@ -48,4 +51,12 @@ class AddressController < ApplicationController
     end   
   end   
 
+  private 
+  def set_address
+    @address = Address.find(params[:id])
+  end
+
+  def address_params
+    params.require(:address).permit(:street, :city, :state, :country, :pin_code)
+  end
 end

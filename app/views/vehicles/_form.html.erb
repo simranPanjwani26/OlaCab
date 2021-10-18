@@ -1,0 +1,38 @@
+ <%= form_with(model: vehicle) do |f| %>
+      <% if @vehicle.errors.any? %>
+        <div id="error_explanation">
+          <div class="alert alert-danger">
+            The form contains <%= pluralize(@vehicle.errors.count, "error") %>.
+          </div>
+          <ul>
+          <% @vehicle.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+          </ul>
+        </div>
+      <% end %>
+      <div class="field">
+      <%= f.label :license_number%>
+      <%= f.text_field :license_number %>
+      </div>
+      <div class="field">
+      <%= f.label :vehicle_type %>
+      <%= f.text_field :vehicle_type %>
+      </div>
+      <div class="field">
+      <%= f.label :vehicle_model %>
+      <%= f.text_field :vehicle_model %>
+      </div>
+      <div class="field">
+      <%= f.label :location %>
+      <%= f.text_field :location %>
+      </div>
+      <div class="field">
+      <%= f.label :status %>
+      <%= f.text_field :status %>
+      </div>
+      
+      <div class="actions">
+      <%= f.submit %>
+      </div>
+    <% end %>

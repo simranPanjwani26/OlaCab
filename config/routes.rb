@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
-  devise_for :users
+  resources :vehicles
+  devise_for :users, :controllers => {:registrations => "users/registrations"}
   resources :users
-  root to: "home#index"
   root 'users#index'
   resources :addresses
-  root 'address#index'
+  resources :bookings
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
