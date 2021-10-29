@@ -11,24 +11,38 @@
           </ul>
         </div>
       <% end %>
+
+      <div class="form-group">
+        <% if @vehicle.image.attached? %>
+          <%= image_tag @vehicle.image, style: "width: 200px; display: bolck" %>
+        <% end %> 
+        
+        <%= f.label :image%><br>
+        <%= f.file_field :image, class: "form-control" %>
+      </div>
+
       <div class="field">
-      <%= f.label :license_number%>
+      <%= f.label :license_number%><br>
       <%= f.text_field :license_number %>
       </div>
+
       <div class="field">
-      <%= f.label :vehicle_type %>
+      <%= f.label :vehicle_type %><br>
       <%= f.text_field :vehicle_type %>
       </div>
+
       <div class="field">
-      <%= f.label :vehicle_model %>
+      <%= f.label :vehicle_model %><br>
       <%= f.text_field :vehicle_model %>
       </div>
+
       <div class="field">
-      <%= f.label :location %>
+      <%= f.label :location %><br>
       <%= f.text_field :location %>
       </div>
+
       <div class="field">
-      <%= f.label :status %>
+      <%= f.label :status %><br>
       <%= f.text_field :status %>
       </div>
       

@@ -1,17 +1,23 @@
 class UsersController < ApplicationController
+  before_action :set_user, only: [:show, :edit, :update, :destroy]
   def index
     @users = User.all
+    authorize User
   end
 
   def show
-    @user = User.find(params[:id])
   end
 
-  def edit   
-    @user = User.find(params[:id])   
+  def edit    
+      authorize User
   end   
 
-  def update   
+  def new
+    @user =User.new
+  end
+
+  def update 
+    authorize User  
     @user = User.find(params[:id])   
     if @user.update_attributes(user_params)   
       flash[:notice] = 'User updated!'   
@@ -20,9 +26,11 @@ class UsersController < ApplicationController
       flash[:error] = 'Failed to edit user!'   
       render :edit   
     end   
+  
   end   
 
-  def destroy   
+  def destroy
+    authorize User   
     @user = User.find(params[:id])   
     if @user.delete   
       flash[:notice] = 'User deleted!'   
@@ -34,7 +42,12 @@ class UsersController < ApplicationController
   end   
 
   private
+
+  def set_user
+    @user = User.find(params[:id])
+  end
+
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :phone_no, :email, :password, :password_confirmation)
+    params.require(:user).permit(:role, :first_name, :last_name, :phone_no, :email, :password, :password_confirmation)
   end
 end

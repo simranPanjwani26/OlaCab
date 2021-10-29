@@ -1,12 +1,13 @@
 class BookingsController < ApplicationController
   #require 'date'
   #Time.zone = 'Indian Standard Time (IST)'
+  skip_before_action :verify_authenticity_token
+  before_action :set_booking, only: [:show, :edit, :update, :destroy]
   def index
     @bookings = Booking.all
   end
 
   def show
-    @booking = Booking.find(params[:id])
   end
 
   def new   
@@ -14,18 +15,21 @@ class BookingsController < ApplicationController
   end  
 
   def edit
-    @booking = Booking.find(params[:id])
   end
 
   def create   
-    @booking = Boooking.new(booking_params)   
-      if @booking.save   
-        flash[:notice] = 'booking added!'   
-        redirect_to root_path   
-      else   
-        flash[:error] = 'Failed to add boooking'   
-        render :new   
-      end  
+    @booking = Booking.new(booking_params)
+
+    respond_to do |format|
+      if @booking.save
+        format.html { redirect_to @booking, notice: "Address was successfully created." }
+        format.json { render :show, status: :created, location: @booking }
+      else
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: @booking.errors, status: :unprocessable_entity }
+      end
+    end
+      
   end
 
   def update

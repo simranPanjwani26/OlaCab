@@ -4,7 +4,7 @@ class AddressesController < ApplicationController
   end
 
   def show   
-    @address = Address.find(params[:id])   
+    @addresses = Address.find(params[:id])   
   end   
     
   def new   

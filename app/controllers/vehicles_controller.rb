@@ -1,6 +1,9 @@
 class VehiclesController < ApplicationController
+  before_action :set_vehicle, only: [:show, :edit, :update, :destroy]
   def index
     @vehicles = Vehicle.all
+    # @vehicles = Vehicle.search(params[:search])
+    
   end
 
   def show 
@@ -50,6 +53,8 @@ class VehiclesController < ApplicationController
     end
   end
 
+  
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_vehicle
@@ -58,7 +63,7 @@ class VehiclesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def vehicle_params
-      params.require(:vehicle).permit(:vehicle_id, :vehicle_type, :license_number, :vehicle_model, :location, :status)
+      params.require(:vehicle).permit(:vehicle_type, :license_number, :vehicle_model, :location, :status, :image)
     end
 end
 

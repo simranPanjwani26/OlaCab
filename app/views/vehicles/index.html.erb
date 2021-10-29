@@ -1,12 +1,13 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Vehicles</h1>
+<h1 class="head">Vehicles</h1>
 
 <table> 
   <thead>
     <tr>
       
       <th colspan="2"></th>
+      <th>Image</th>
       <th>VehicleType</th>
       <th>LicenseNumber</th>
       <th>VehicleModel</th>
@@ -18,6 +19,11 @@
   <tbody>
     <% @vehicles.each do |vehicle| %>
       <tr>
+        <td>
+          <% if vehicle.image.attached? %>
+            <%= image_tag vehicle.image, style: "width: 200px; display: bolck" %>
+          <% end %> 
+        </td>
         <td><%= vehicle.vehicle_type %></td>
         <td><%= vehicle.license_number %></td>
         <td><%= vehicle.vehicle_model %></td>
@@ -25,7 +31,7 @@
         <td><%= vehicle.status %></td>
         <td><%= link_to 'Show', vehicle %></td>
         <td><%= link_to 'Edit', edit_vehicle_path(vehicle) %></td>
-        <td><%= link_to 'Destroy', vehicle, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Destroy', vehicle_path(vehicle), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

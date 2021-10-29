@@ -1,28 +1,35 @@
 <p id="notice"><%= notice %></p>
 
 <p>
+  <strong>Vehicle Image:</strong>
+  <% if @vehicle.image.attached? %>
+    <%= image_tag @vehicle.image, style: "width: 200px; display: bolck" %>
+  <% end %> 
+</p>
+
+<p>
   <strong>License Number:</strong>
-  <%= @vehicle.license_number %>
+  <%= @vehicle.license_number, style: "color: white" %>
 </p>
 
 <p>
   <strong>Vehicle Type:</strong>
-  <%= @vehicle.vehicle_type %>
+  <%= @vehicle.vehicle_type, style: "color: white"%>
 </p>
 
 <p>
   <strong>Vehicle Model:</strong>
-  <%= @vehicle.vehicle_model %>
+  <%= @vehicle.vehicle_model, style: "color: white" %>
 </p>
 
 <p>
   <strong>Location:</strong>
-  <%= @vehicle.location %>
+  <%= @vehicle.location, style: "color: white" %>
 </p>
 
 <p>
   <strong>Status:</strong>
-  <%= @vehicle.status %>
+  <%= @vehicle.status, style: "color: white" %>
 </p>
 
 <%= link_to 'Edit', edit_vehicle_path(@vehicle) %> |
