@@ -13,13 +13,15 @@
 
   <body>
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-      <a href="#" class="navbar-brand">Ola Cab</a>
+      <a href="#" class="navbar-brand">
+      Ola Cab
+      </a>
       <ul class="navbar-nav">
       <div id="user_header">  
          <%if current_user %>  
            Logged in as <%= current_user.email %>.  
-         <%# <%= link_to "Log Out",  destroy_user_session_path, method: "DELETE" %>  
-         <li class="nav-item"><a href="/users/sign_out"  class="nav-link">Log Out</a></li>
+        <%= link_to 'Log Out',  destroy_user_session_path, method: "DELETE" %>  
+         
       <% else %> 
         <%# <%= link_to "Sign Up",  new_user_registration_path%>
         <li class="nav-item"><a href="/users/sign_up" class="nav-link">Sign Up</a></li>
@@ -29,6 +31,7 @@
       </div>  
       <p class="notice"><%= notice %></p>
       <p class="alert"><%= alert %></p>
+      
         <li class="nav-item"><a href="/users" class="nav-link">Home</a></li>
         <li class="nav-item"><a href="/vehicles" class="nav-link">Vehicles</a></li>
         <li class="nav-item"><a href="/bookings" class="nav-link">Booking</a></li>
@@ -36,6 +39,15 @@
     </ul>
     </nav>
     <%= yield %>
+  <footer class="page-footer font-small indigo">
+
+  <!-- Copyright -->
+  <div class="footer-copyright text-center py-3">© 2021 Copyright:
+    <a href="https://olaCab.com/"> OlaCab.com</a>
+  </div>
+  <!-- Copyright -->
+
+</footer>
     
   </body>
 </html>

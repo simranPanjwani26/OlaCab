@@ -1,36 +1,20 @@
 <p id="notice"><%= notice %></p>
+<div class="row">
+  <div class="col-md-9">
+    <% if @vehicle.image.attached? %>
+      <%= image_tag @vehicle.image, style: "width: 200px; display: bolck" %>
+    <% end %> 
+  </div>
 
-<p>
-  <strong>Vehicle Image:</strong>
-  <% if @vehicle.image.attached? %>
-    <%= image_tag @vehicle.image, style: "width: 200px; display: bolck" %>
-  <% end %> 
-</p>
-
-<p>
-  <strong>License Number:</strong>
-  <%= @vehicle.license_number, style: "color: white" %>
-</p>
-
-<p>
-  <strong>Vehicle Type:</strong>
-  <%= @vehicle.vehicle_type, style: "color: white"%>
-</p>
-
-<p>
-  <strong>Vehicle Model:</strong>
-  <%= @vehicle.vehicle_model, style: "color: white" %>
-</p>
-
-<p>
-  <strong>Location:</strong>
-  <%= @vehicle.location, style: "color: white" %>
-</p>
-
-<p>
-  <strong>Status:</strong>
-  <%= @vehicle.status, style: "color: white" %>
-</p>
-
-<%= link_to 'Edit', edit_vehicle_path(@vehicle) %> |
-<%= link_to 'Back', vehicles_path %>
+  <div class="col-md-6">
+    <p><b>License Number: </b><%= @vehicle.license_number %></p>
+    <p><b>Vehicle Type: </b><%= @vehicle.vehicle_type %></p>
+    <p><b>Vehicle Model: </b><%= @vehicle.vehicle_model %></p>
+    <p><b>Location: </b><%= @vehicle.location %></p>
+    <p><b>Status: </b><%= @vehicle.status%></p>
+    <p>
+    <%= link_to 'Edit', edit_vehicle_path(@vehicle) %>
+    <%= link_to 'Back', vehicles_path %>
+    </p>
+  </div>
+</div>

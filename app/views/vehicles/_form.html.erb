@@ -21,6 +21,11 @@
         <%= f.file_field :image, class: "form-control" %>
       </div>
 
+      <div>
+        <%= f.label :statuses %><br>
+        <%= f.select :statuses, Vehicle.statuses.keys %>
+      </div>
+
       <div class="field">
       <%= f.label :license_number%><br>
       <%= f.text_field :license_number %>
@@ -41,11 +46,11 @@
       <%= f.text_field :location %>
       </div>
 
-      <div class="field">
-      <%= f.label :status %><br>
-      <%= f.text_field :status %>
-      </div>
-      
+      <%# <div class="field">
+      <%# <%= f.label :status % %>
+      <%# <%= f.text_field :status %>
+      <%# </div> %>
+       
       <div class="actions">
       <%= f.submit %>
       </div>

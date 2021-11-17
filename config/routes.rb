@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
-  # get 'welcome/index'
   
+  # get 'welcome/index'
+  get '/search', to: 'vehicles#search'
+  post '/booking', to: 'bookings#create'
+  post '/vehicles/search', to: 'vehicles#search'
   resources :vehicles
   devise_for :users, :controllers => {:registrations => "users/registrations"}
   resources :users

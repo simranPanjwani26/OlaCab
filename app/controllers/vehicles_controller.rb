@@ -1,19 +1,59 @@
 class VehiclesController < ApplicationController
   before_action :set_vehicle, only: [:show, :edit, :update, :destroy]
   def index
-    @vehicles = Vehicle.all
+    # @vehicles =Vehicle.available_vehicles
+    # render  json: {status: 'success', vehicles: @vehicles }
+
+    # @vehicles = Vehicle.all
     # @vehicles = Vehicle.search(params[:search])
-    
+    @vehicles = Vehicle.paginate(page: params[:page], per_page: 3)
   end
+  
+  # def book_nearest
+   
+  #   @vehicle = Vehicle.nearest(params[:loc].to_f, params[:lat].to_f)
+  #   if @vehicle.nil?
+  #     response = { status: 'failure', message: 'Sorry no cabs are available' }
+  #   else
+  #     booking = vehicle.book(params[:customer_id], params[:loc], params[:lat])
+  #     if booking
+  #       response = { status: 'success', vehicle: @vehicle, booking_id: booking.id, message: 'Booking Success' }
+  #     else
+  #       response = { status: 'failure', message: 'Sorry! Failed to book trip' }
+  #     end
+  #   end
+  #   render json: response
+  # end
 
   def show 
-    @vehicle = Vehicle.find(params[:id])
   end
 
   def new
     @vehicle = Vehicle.new 
   end 
 
+  def search
+    # ick_up = params[:pick_up]
+    # drop = params[:drop]
+    # results = Geocoder.search(params[:pick_up])
+    # results.first.coordinates
+    @pick_up = params[:pick_up]
+    @vehicles = Vehicle.where("vehicles.location LIKE ? ", ["%#{@pick_up}%"])
+
+    # @vehicles = Vehicle.where('location' LIKE? )
+    
+  end
+
+  
+  #   byebug
+  #   pick_up= geocoder.search()
+  #   drop= geocoder.search()
+
+  #   if pickup.near()== @vehicle.location
+  #     format.html { redirect_to @vehicle, notice: "Searching for vehicles" }
+  #     format.json { render :search, status: :ok, location: @vehicle }
+  #   end
+  # end 
   def edit
     @vehicle = Vehicle.find(params[:id])
   end
@@ -46,11 +86,14 @@ class VehiclesController < ApplicationController
 
   # DELETE /vehicles/1 or /vehicles/1.json
   def destroy
-    @vehicle.destroy
-    respond_to do |format|
-      format.html { redirect_to vehicles_url, notice: "Vehicle was successfully destroyed." }
-      format.json { head :no_content }
-    end
+    
+    if @vehicle.destroy  
+      flash[:notice] = 'Vehicle deleted!'   
+      redirect_to root_path   
+    else   
+      flash[:error] = 'Failed to delete this Vehicle!'   
+      render :destroy   
+    end   
   end
 
   
@@ -63,11 +106,6 @@ class VehiclesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def vehicle_params
-      params.require(:vehicle).permit(:vehicle_type, :license_number, :vehicle_model, :location, :status, :image)
+      params.require(:vehicle).permit(:id, :vehicle_type, :license_number, :vehicle_model, :location, :status, :image, :lat, :Long, :search)
     end
 end
-
-    
-  
-
-  

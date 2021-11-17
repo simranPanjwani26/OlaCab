@@ -1,15 +1,19 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  after_action :verify_authorized, only: [:new, :create, :edit, :destroy]
   def index
+    #byebug
     @users = User.all
-    authorize User
+    #authorize User
+    @users = User.paginate(page: params[:page], per_page: 5)
+
   end
 
   def show
   end
 
   def edit    
-      authorize User
+    #authorize User
   end   
 
   def new
@@ -17,22 +21,22 @@ class UsersController < ApplicationController
   end
 
   def update 
-    authorize User  
-    @user = User.find(params[:id])   
-    if @user.update_attributes(user_params)   
+    #authorize User  
+        
+    if @user.update(user_params)   
       flash[:notice] = 'User updated!'   
       redirect_to root_path   
     else   
       flash[:error] = 'Failed to edit user!'   
-      render :edit   
+      render 'edit'  
     end   
   
   end   
 
   def destroy
-    authorize User   
-    @user = User.find(params[:id])   
-    if @user.delete   
+    #authorize User   
+    
+    if @user.destroy  
       flash[:notice] = 'User deleted!'   
       redirect_to root_path   
     else   

@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<h1 class="head">Vehicles</h1>
+<h1 class="head">Searched Vehicles</h1>
 <div class="row">
 <table> 
   <thead>
@@ -29,20 +29,10 @@
         <td><%= vehicle.vehicle_model %></td>
         <td><%= vehicle.location %></td>
         <td><%= vehicle.status %></td>
-        <td><button><%= link_to 'Show', vehicle%></button></td>
-        <td><%= button_to 'Edit', edit_vehicle_path(vehicle) %></td>
-        <td><%= button_to 'Destroy', vehicle_path(vehicle), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= button_to 'Book', bookings_path	 %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 </div>
 <br>
-
-<button><%= link_to 'New Vehicle', new_vehicle_path %></button>
-<%# <%= content_tag :table, class: 'table' do %>
-  <%# <%= content_tag :thead, display_vehicle_sorted_column_headers(@vehicles), nil, false %>
-  <%# <%= content_tag :tbody, display_vehicle_search_results(@vehicles), nil, false %> 
-<%# <% end %> 
-  <%= will_paginate @vehicle %>
-
