@@ -17,6 +17,7 @@
   </thead>
 
   <tbody>
+
     <% @vehicles.each do |vehicle| %>
       <tr>
         <td>
@@ -29,7 +30,7 @@
         <td><%= vehicle.vehicle_model %></td>
         <td><%= vehicle.location %></td>
         <td><%= vehicle.status %></td>
-        <td><%= button_to 'Book', bookings_path	 %></td>
+        <td><%= button_to 'Book', new_booking_path(:pick_up => @pick_up, :drop => @drop, :distance => @distance) %></td>
       </tr>
     <% end %>
   </tbody>

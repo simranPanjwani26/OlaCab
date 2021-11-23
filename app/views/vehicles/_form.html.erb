@@ -21,35 +21,35 @@
         <%= f.file_field :image, class: "form-control" %>
       </div>
 
-      <div>
-        <%= f.label :statuses %><br>
-        <%= f.select :statuses, Vehicle.statuses.keys %>
-      </div>
+      <%# <div>
+        <%# <%= f.label :statuses %>
+        <%# <%= f.select :statuses, Vehicle.statuses.keys %>
+      <%# </div>  %>
 
-      <div class="field">
+      <div class="form-group">
       <%= f.label :license_number%><br>
       <%= f.text_field :license_number %>
       </div>
 
-      <div class="field">
+      <div class="form-group">
       <%= f.label :vehicle_type %><br>
       <%= f.text_field :vehicle_type %>
       </div>
 
-      <div class="field">
+      <div class="form-group">
       <%= f.label :vehicle_model %><br>
       <%= f.text_field :vehicle_model %>
       </div>
 
-      <div class="field">
+      <div class="form-group">
       <%= f.label :location %><br>
       <%= f.text_field :location %>
       </div>
 
-      <%# <div class="field">
-      <%# <%= f.label :status % %>
-      <%# <%= f.text_field :status %>
-      <%# </div> %>
+      <div class="form-group">
+      <%= f.label :status %><br>
+      <%= f.text_field :status %>
+      </div>
        
       <div class="actions">
       <%= f.submit %>

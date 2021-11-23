@@ -18,26 +18,36 @@
       </a>
       <ul class="navbar-nav">
       <div id="user_header">  
-         <%if current_user %>  
-           Logged in as <%= current_user.email %>.  
-        <%= link_to 'Log Out',  destroy_user_session_path, method: "DELETE" %>  
+         <%if user_signed_in? %>  
+           Logged in as <%= current_user.email %>. 
+           <%= current_user.role%> 
+          
+        <%# <%= link_to 'Log Out',  user_sign_out_path %>  
+        <%= link_to "Logout", destroy_user_session_path, method: :delete, class: 'btn btn-danger '  %> 
          
       <% else %> 
-        <%# <%= link_to "Sign Up",  new_user_registration_path%>
-        <li class="nav-item"><a href="/users/sign_up" class="nav-link">Sign Up</a></li>
-        <li class="nav-item"><a href="/users/sign_in" class="nav-link">Log In</a></li>
-        <%# <%= link_to "Log In", new_user_session_path %> 
+        <%= link_to "Sign Up",  new_user_registration_path, class: 'btn btn-primary' %>
+        <%# <li class="nav-item"><a href="/users/sign_up" class="nav-link">Sign Up</a></li> %>
+        <%# <li class="nav-item"><a href="/users/sign_in" class="nav-link">Log In</a></li> %>
+        <%= link_to "Log In", new_user_session_path, class: 'btn btn-success' %>
       <% end %>  
       </div>  
       <p class="notice"><%= notice %></p>
       <p class="alert"><%= alert %></p>
-      
-        <li class="nav-item"><a href="/users" class="nav-link">Home</a></li>
+         <%# <% if policy(:user).index? %> 
+        <li class="nav-item"><a href="/users" class="nav-link">Home</a></li> e
+        <%# <% end %>
         <li class="nav-item"><a href="/vehicles" class="nav-link">Vehicles</a></li>
         <li class="nav-item"><a href="/bookings" class="nav-link">Booking</a></li>
         <%# <li class="nav-item"><a href="/addresses/new" class="nav-link">Address</a></li> %>
     </ul>
     </nav>
+      <% if notice %>
+        <p class="alert alert-success"><%= notice %></p>
+      <% end %>
+      <% if alert %>
+        <p class="alert alert-danger"><%= alert %></p>
+      <% end %>
     <%= yield %>
   <footer class="page-footer font-small indigo">
 

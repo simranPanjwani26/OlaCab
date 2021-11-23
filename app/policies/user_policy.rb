@@ -15,7 +15,7 @@ class UserPolicy
        user.admin?
     end
 
-    def index
+    def index?
         user.admin?
     end
 end

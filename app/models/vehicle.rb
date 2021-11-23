@@ -1,12 +1,12 @@
 class Vehicle < ApplicationRecord
     has_many :bookings 
     has_one_attached :image, :dependent => :destroy
-    enum status: [:available, :booked]  
+    # enum status: [:available, :booked]  
 
-    # validates_inclusion_of :status, in: STATUS
-    # validates_uniqueness_of :license_number
+    # # validates_inclusion_of :status, in: STATUS
+    # # validates_uniqueness_of :license_number
 
-    scope :available_vehicles, -> { where(status: 'available').order(created_at: 'desc') }
+    # scope :available_vehicles, -> { where(status: 'available').order(created_at: 'desc') }
     
   #   geocoded_by :address # address is an attribute of MyModel
 
@@ -33,14 +33,14 @@ class Vehicle < ApplicationRecord
         # results
     # end
 
-    def available?
-        status == 'available'
-    end
+    # def available?
+    #     status == 'available'
+    # end
 
     # def book(user_id, lat, Long)
     #     return false unless available?
     #     update_attribute(:status, 'booked')
-    #     Booking.create!(vehicle_id: id, customer_id: customer_id, starting_lat: lat, starting_long: Long, status: 'scheduled')
+    #     Booking.create!(vehicle_id: id, user_id: user_id, starting_lat: lat, starting_long: Long, status: 'scheduled')
     # end
 
     # def self.car_list

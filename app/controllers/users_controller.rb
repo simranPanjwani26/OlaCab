@@ -2,9 +2,9 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   after_action :verify_authorized, only: [:new, :create, :edit, :destroy]
   def index
-    #byebug
-    @users = User.all
-    #authorize User
+    byebug
+    # @users = User.all
+    authorize User
     @users = User.paginate(page: params[:page], per_page: 5)
 
   end
@@ -13,7 +13,7 @@ class UsersController < ApplicationController
   end
 
   def edit    
-    #authorize User
+    authorize User
   end   
 
   def new
@@ -21,7 +21,7 @@ class UsersController < ApplicationController
   end
 
   def update 
-    #authorize User  
+    authorize User  
         
     if @user.update(user_params)   
       flash[:notice] = 'User updated!'   
@@ -34,7 +34,7 @@ class UsersController < ApplicationController
   end   
 
   def destroy
-    #authorize User   
+    authorize User   
     
     if @user.destroy  
       flash[:notice] = 'User deleted!'   
