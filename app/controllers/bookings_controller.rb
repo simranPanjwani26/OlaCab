@@ -34,6 +34,7 @@ class BookingsController < ApplicationController
   def create 
     byebug
     authorize Booking 
+    
     # @vehicle = Vehicle.find(params[:vehicle_id])  
     @booking = Booking.new(booking_params)
     @booking.user = current_user

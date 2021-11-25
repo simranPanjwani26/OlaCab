@@ -3,6 +3,10 @@ class Vehicle < ApplicationRecord
     has_one_attached :image, :dependent => :destroy
     # enum status: [:available, :booked]  
 
+    geocoded_by :pick_up
+    geocoded_by :drop
+    reverse_geocoded_by :latitude, :longitude
+    after_validation :geocode
     # # validates_inclusion_of :status, in: STATUS
     # # validates_uniqueness_of :license_number
 
