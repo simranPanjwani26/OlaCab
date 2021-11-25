@@ -10,37 +10,24 @@
       </ul>
     </div>
   <% end %>
-  <div class="field">
-    <%= f.label :pick_up%>
-    <%= f.text_field :pick_up%>
+  <div>
+   <%= f.label :vehicle_id %>
+    <%= f.text_field :vehicle_id %>
   </div>
   <div class="field">
-    <%= f.label :drop%>
-    <%= f.text_field :drop%>
+    <%= f.label :pick_up %>
+    <%= f.text_field :pick_up %>
+  </div>
+  <div class="field">
+    <%= f.label :drop %>
+    <%= f.text_field :drop %>
   </div>
   <div class="field">
     <%= f.label :distance%>
     <%= f.number_field :distance %>
   </div>
-  <div class="field">
-    <%= f.label :pick_up_time%>
-    <%= f.text_field :pick_up_time %>
-  </div>
-  <div class="field">
-    <%= f.label :return_time%>
-    <%= f.text_field :return_time %>
-  </div>
-  <div class="field">
-    <%= f.label :booking_status %>
-    <%= f.text_field :booking_status %>
-  </div>
-  <div class="field">
-    <%= f.label :booking_price%>
-    <%= f.text_field :booking_price %>
-  </div>
-    
-
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit%>
   </div>
+  
 <% end %>

@@ -9,5 +9,7 @@ class CreateBookings < ActiveRecord::Migration[6.1]
 
       t.timestamps
     end
+    add_foreign_key :bookings, :users
+    add_foreign_key :bookings, :vehicles
   end
 end

@@ -49,6 +49,7 @@ class VehiclesController < ApplicationController
     drop = Geocoder.search(params[:drop])
     drop_coordinates = drop.first.coordinates
     @distance = Geocoder::Calculations.distance_between(pick_up_coordinates, drop_coordinates, :units => :km)
+    
     # pick_up_coordinates = Geocoder.coordinates(params[:pick_up])
     # drop_coordinates = Geocoder.coordinates(params[:drop])
     # @booking.distance = Geocoder::Calculations.distance_between(pick_up_coordinates, drop_coordinates)

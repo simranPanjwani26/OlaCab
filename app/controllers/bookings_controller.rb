@@ -2,8 +2,13 @@ class BookingsController < ApplicationController
   #require 'date'
   #Time.zone = 'Indian Standard Time (IST)'
   # skip_before_action :verify_authenticity_token
+  # protect_from_forgery prepend: true
+
+
   before_action :set_booking, only: [:show, :edit, :update, :destroy]
   after_action :verify_authorized, only: [:new, :create, :edit, :destroy]
+  # skip_before_action :verify_authenticity_token
+
 
   def index
     @bookings = Booking.all
@@ -12,8 +17,13 @@ class BookingsController < ApplicationController
   def show
   end
 
-  def new   
-    @booking = Booking.new(pick_up: params[:pick_up], drop: params[:drop], distance: params[:distance])  
+  def new 
+    # @vehicle = Vehicle.find(params[:vehicle_id])  
+    @booking = Booking.new(pick_up: params[:pick_up], drop: params[:drop], distance: params[:distance], vehicle_id: params[:vehicle_id]) 
+    # @booking.vehicle_id = @vehicle.id
+ 
+    @booking.user = current_user
+
     authorize Booking 
   end  
 
@@ -21,11 +31,14 @@ class BookingsController < ApplicationController
     authorize Booking
   end
 
-  def create  
+  def create 
+    byebug
     authorize Booking 
+    # @vehicle = Vehicle.find(params[:vehicle_id])  
     @booking = Booking.new(booking_params)
-    
-    @booking.update(user_id: @current_user.id)
+    @booking.user = current_user
+
+    # @booking_price = @distance * 5
     # @booking.update(vehicle_id: @vehicle.id)
     respond_to do |format|
       if @booking.save
@@ -35,8 +48,8 @@ class BookingsController < ApplicationController
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @booking.errors, status: :unprocessable_entity }
       end
-    end
-      
+    
+    end 
   end
 
   def update

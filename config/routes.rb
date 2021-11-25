@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   
   # get 'welcome/index'
   get '/search', to: 'vehicles#search'
+  
   post '/bookings/new', to: 'bookings#new'
   post '/vehicles/search', to: 'vehicles#search'
   resources :vehicles
@@ -9,6 +10,9 @@ Rails.application.routes.draw do
   # get '/user/sign_out' => 'devise/sessions#destroy'
   resources :users
   #root 'users#index'
+  # resources :vehicles do
+  #   resources :bookings
+  # end  
   resources :addresses
   resources :bookings
   root :to => "welcome#index"
