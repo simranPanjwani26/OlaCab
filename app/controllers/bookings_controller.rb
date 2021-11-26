@@ -32,17 +32,22 @@ class BookingsController < ApplicationController
   end
 
   def create 
-    byebug
+    # byebug
     authorize Booking 
     
+    # @rate = 5
+    # @booking_price =  @distance * @rate
     # @vehicle = Vehicle.find(params[:vehicle_id])  
     @booking = Booking.new(booking_params)
     @booking.user = current_user
+    distance = booking_params[:distance]
+    @booking.booking_price = distance.to_i * 5
 
-    # @booking_price = @distance * 5
     # @booking.update(vehicle_id: @vehicle.id)
     respond_to do |format|
       if @booking.save
+        
+
         format.html { redirect_to @booking, notice: "Booking was successfully created." }
         format.json { render :show, status: :created, location: @booking }
       else
