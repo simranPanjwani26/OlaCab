@@ -15,4 +15,6 @@
 
     <%= link_to 'Edit', edit_booking_path(@booking), class: 'btn btn-warning' %> |
     <%= link_to 'Back', bookings_path, class: 'btn btn-primary' %>
+
+    <%= link_to "Booking CSV Downloader", booking_csv_path(@booking, format: "csv"), class: 'btn btn-info'%>
 </div>

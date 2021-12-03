@@ -48,4 +48,6 @@ $(document).ready(function(){
 
 <%= link_to 'New Booking', new_booking_path %>
 
+<%= link_to 'Booking CSV Downloader', booking_csv_path(@booking, format: "csv"), class: 'btn btn-info'%>
+
 <%= will_paginate @booking %>

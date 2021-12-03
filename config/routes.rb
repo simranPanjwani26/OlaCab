@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  
+  get '/booking_csv', to: "bookings#booking_csv", default: { format: :csv }, as: :booking_csv
   # get 'welcome/index'
   get '/search', to: 'vehicles#search'
   
@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => {:registrations => "users/registrations"}
   # get '/user/sign_out' => 'devise/sessions#destroy'
   resources :users
+
+  
   #root 'users#index'
   # resources :vehicles do
   #   resources :bookings

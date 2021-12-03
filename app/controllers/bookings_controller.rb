@@ -24,6 +24,14 @@ class BookingsController < ApplicationController
     end
   end
 
+  def booking_csv
+    @bookings = Booking.all
+    respond_to do |format|
+      format.html
+      format.csv { send_data @bookings.to_csv, type: 'text/csv', filename: "All booking-#{Date.today}.csv" }
+    end
+  end
+
   def new 
    @booking = Booking.new(pick_up: params[:pick_up], drop: params[:drop], distance: params[:distance], vehicle_id: params[:vehicle_id])  
     @booking.user = current_user
