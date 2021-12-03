@@ -1,29 +1,32 @@
 class BookingsController < ApplicationController
-  #require 'date'
-  #Time.zone = 'Indian Standard Time (IST)'
-  # skip_before_action :verify_authenticity_token
-  # protect_from_forgery prepend: true
-
-
+  
   before_action :set_booking, only: [:show, :edit, :update, :destroy]
   after_action :verify_authorized, only: [:new, :create, :edit, :destroy]
-  # skip_before_action :verify_authenticity_token
-
-
+  
   def index
-    @bookings = Booking.all
+    @bookings = Booking.paginate(page: params[:page], per_page: 8)
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render template: "bookings/index.html.erb",
+          pdf: "Bookings: #{@bookings.count}"
+      end
+    end
   end
 
   def show
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render template: "bookings/show.html.erb",
+          pdf: "Booking ID: #{@booking.id}"
+      end
+    end
   end
 
   def new 
-    # @vehicle = Vehicle.find(params[:vehicle_id])  
-    @booking = Booking.new(pick_up: params[:pick_up], drop: params[:drop], distance: params[:distance], vehicle_id: params[:vehicle_id]) 
-    # @booking.vehicle_id = @vehicle.id
- 
+   @booking = Booking.new(pick_up: params[:pick_up], drop: params[:drop], distance: params[:distance], vehicle_id: params[:vehicle_id])  
     @booking.user = current_user
-
     authorize Booking 
   end  
 
@@ -32,22 +35,13 @@ class BookingsController < ApplicationController
   end
 
   def create 
-    # byebug
     authorize Booking 
-    
-    # @rate = 5
-    # @booking_price =  @distance * @rate
-    # @vehicle = Vehicle.find(params[:vehicle_id])  
     @booking = Booking.new(booking_params)
     @booking.user = current_user
     distance = booking_params[:distance]
     @booking.booking_price = distance.to_i * 5
-
-    # @booking.update(vehicle_id: @vehicle.id)
     respond_to do |format|
       if @booking.save
-        
-
         format.html { redirect_to @booking, notice: "Booking was successfully created." }
         format.json { render :show, status: :created, location: @booking }
       else
@@ -71,6 +65,7 @@ class BookingsController < ApplicationController
 
   def destroy
     authorize Booking
+    # byebug
     @booking.destroy
     respond_to do |format|
       format.html { redirect_to bookings_url, notice: "Booking was successfully destroyed." }

@@ -35,8 +35,9 @@
         <% if policy(:vehicle).update? %>
         <td><%= link_to 'Edit', edit_vehicle_path(vehicle), class: 'btn btn-warning' %></td>
         <% end %>
-        <% if policy(:vehicle).update? %>
-        <td><%= link_to 'Destroy', vehicle_path(vehicle), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %></td>
+        <% if policy(:vehicle).destroy? %>
+        <td><%= link_to 'Destroy', vehicles_delete_path(vehicle),
+                        class: 'btn btn-danger' %></td>
         <% end %>
       </tr>
     <% end %>
@@ -47,9 +48,6 @@
 <% if policy(:vehicle).update?%>
 <%= link_to 'New Vehicle', new_vehicle_path, class: 'btn btn-primary'%>
 <% end %>
-<%# <%= content_tag :table, class: 'table' do %>
-  <%# <%= content_tag :thead, display_vehicle_sorted_column_headers(@vehicles), nil, false %>
-  <%# <%= content_tag :tbody, display_vehicle_search_results(@vehicles), nil, false %> 
-<%# <% end %> 
+
   <%= will_paginate @vehicle %>
 

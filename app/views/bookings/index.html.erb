@@ -1,35 +1,51 @@
 <p id="notice"><%= notice %></p>
 
 <h1 class="head">Bookings</h1>
-
+<div class="row">
 <table>
+<input id="myInput" type="text" placeholder= "Search..">
+<script>
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
+
+  <%= link_to "PDF", bookings_path(format: :pdf) %>
+
   <thead>
     <tr>
-      <th colspan="3"></th>
-      <th> Pick  Up Time </th>
-      <th> Return Time </th>
-      <th> Booking Status </th>
+      
+      <th> Pick Up</th>
+      <th> Drop</th>
+      <th> Distance</th>
       <th> Booking Price </th>
       
     </tr>
   </thead>
 
-  <tbody>
+  <tbody id="myTable">
     <% @bookings.each do |booking| %>
       <tr>
-        <td><%= booking.pick_up_time %></td>
-        <td><%= booking.return_time %></td>
-        <td><%= booking.booking_status %></td>
+        <td><%= booking.pick_up %></td>
+        <td><%= booking.drop %></td>
+        <td><%= booking.distance %></td>
         <td><%= booking.booking_price %></td>
       
-        <td><%= link_to 'Show', booking_path(booking) %></td>
-        <td><%= link_to 'Edit', edit_booking_path(booking) %></td>
-        <td><%= link_to 'Destroy', booking_path(booking), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', booking_path(booking), class: 'btn btn-info' %></td>
+        <td><%= link_to 'Edit', edit_booking_path(booking), class: 'btn btn-warning' %></td>
+        <td><%= link_to 'Destroy', booking_path(booking), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
+</div>
 <br>
 
 <%= link_to 'New Booking', new_booking_path %>
+
+<%= will_paginate @booking %>

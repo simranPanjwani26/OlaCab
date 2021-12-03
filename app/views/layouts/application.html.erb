@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     
@@ -20,26 +20,23 @@
       <div id="user_header">  
          <%if user_signed_in? %>  
            Logged in as <%= current_user.email %>. 
-           <%= current_user.role%> 
+           Welcome <%= current_user.first_name %>
+           as : <%= current_user.role%> 
           
-        <%# <%= link_to 'Log Out',  user_sign_out_path %>  
+         
         <%= link_to "Logout", destroy_user_session_path, method: :delete, class: 'btn btn-danger '  %> 
          
       <% else %> 
         <%= link_to "Sign Up",  new_user_registration_path, class: 'btn btn-primary' %>
-        <%# <li class="nav-item"><a href="/users/sign_up" class="nav-link">Sign Up</a></li> %>
-        <%# <li class="nav-item"><a href="/users/sign_in" class="nav-link">Log In</a></li> %>
         <%= link_to "Log In", new_user_session_path, class: 'btn btn-success' %>
       <% end %>  
       </div>  
       <p class="notice"><%= notice %></p>
       <p class="alert"><%= alert %></p>
-         <%# <% if policy(:user).index? %> 
-        <li class="nav-item"><a href="/users" class="nav-link">Home</a></li> e
-        <%# <% end %>
+        <li class="nav-item"><a href="#" class="nav-link">Home</a></li>
         <li class="nav-item"><a href="/vehicles" class="nav-link">Vehicles</a></li>
         <li class="nav-item"><a href="/bookings" class="nav-link">Booking</a></li>
-        <%# <li class="nav-item"><a href="/addresses/new" class="nav-link">Address</a></li> %>
+        
     </ul>
     </nav>
       <% if notice %>

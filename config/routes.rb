@@ -13,6 +13,10 @@ Rails.application.routes.draw do
   # resources :vehicles do
   #   resources :bookings
   # end  
+  # delete 'vehicles/:id' => "vehicles#destroy"
+  delete 'vehicles/:id/delete' => 'vehicles#destroy', as: 'vehicles_delete'
+  get '/vehicles/:id/delete' => 'vehicles#destroy'
+  
   resources :addresses
   resources :bookings
   root :to => "welcome#index"

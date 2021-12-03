@@ -1,17 +1,18 @@
 <p id="notice"><%= notice %></p>
 
+
+
 <div >
-  
 
+    <div>
 
-<div>
+        <p><b>Pick Up Location: </b><%= @booking.pick_up %></p>
+        <p><b>Drop Location: </b><%= @booking.drop %></p>
+        <p><b>Distance : </b><%= @booking.distance %></p>
+        <p><b>Price: </b> Rs.<%= @booking.booking_price %></p>
+    </div>
+    <%= link_to 'PDF', booking_path(@booking, format: :pdf) ,class: 'btn btn-info' %> |
 
-    <p><b>Pick Up Location: </b><%= @booking.pick_up %></p>
-    <p><b>Drop Location: </b><%= @booking.drop %></p>
-    <p><b>Distance : </b><%= @booking.distance %></p>
-    <p><b>Price: </b> Rs.<%= @booking.booking_price %></p>
-</div>
-
-<%= link_to 'Edit', edit_booking_path(@booking), class: 'btn btn-warning' %> |
-<%= link_to 'Back', bookings_path, class: 'btn btn-primary' %>
+    <%= link_to 'Edit', edit_booking_path(@booking), class: 'btn btn-warning' %> |
+    <%= link_to 'Back', bookings_path, class: 'btn btn-primary' %>
 </div>
